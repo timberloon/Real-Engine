@@ -2,6 +2,7 @@
 #include"nova.h"
 
 int main(){
-    int sum = plus(2,3);
-    std::cout<< sum;
+    nova::log my_logger;
+    my_logger.init();
+    my_logger.log_to_client();
 }

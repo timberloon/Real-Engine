@@ -2,10 +2,11 @@
 
 #ifdef _WIN32
     #ifdef NOVALIB_BUILD
-        #define NOVAAPI __declspec(dllexport)
+        #define NOVA_API __declspec(dllexport)
     #else   
-        #define NOVAAPI __declspec(dllimport)
+        #define NOVA_API __declspec(dllimport)
     #endif
 #else
+    #define NOVA_API
     #error Nova is for windows only
 #endif
