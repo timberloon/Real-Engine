@@ -1,0 +1,44 @@
+# ======================
+# Build outputs
+# ======================
+build/
+bin/
+out/
+dist/
+
+# Compiled files
+*.o
+*.obj
+*.exe
+*.out
+*.a
+*.so
+
+# ======================
+# Debug / temporary files
+# ======================
+*.log
+*.tmp
+*.swp
+*.bak
+
+# ======================
+# IDE / Editor stuff
+# ======================
+.vscode/
+.idea/
+*.code-workspace
+
+# ======================
+# OS junk
+# ======================
+.DS_Store
+Thumbs.db
+
+# ======================
+# CMake (if you ever use it)
+# ======================
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
