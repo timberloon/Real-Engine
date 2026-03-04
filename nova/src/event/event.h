@@ -1,4 +1,4 @@
-#include"core.h"
+#pragma once
 #include<string>
 #include<functional>
 
@@ -19,7 +19,7 @@ namespace nova{
         mouse_button_event = BIT(4)
     };
 
-    #define EVENT_CLASS_TYPE(type) static event_type get_static_type(){return event_type::##type; }\
+    #define EVENT_CLASS_TYPE(type) static event_type get_static_type(){return event_type::type; }\
                                  virtual event_type get_event_type() const override {return get_static_type();}\
                                  std::string get_name() {return #type;}
                                 
