@@ -1,6 +1,13 @@
 #pragma once
 #include"core.h"
+#include"event/event.h"
 
-extern "C"{
-    NOVA_API int plus(int a,int b);
+namespace nova{
+    class NOVA_API application{
+    public:
+        application(){}
+        virtual ~application() = default;
+
+        void run();
+    };
 }

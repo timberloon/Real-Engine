@@ -1,5 +1,9 @@
 #include"application.h"
+#include"event/applicationevent.h"
+#include"log.h"
 
-int plus(int a, int b){
-    return a+b;
+namespace nova{
+    void application::run(){
+        
+    }
 }
