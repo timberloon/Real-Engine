@@ -1,3 +1,4 @@
+#include"novapch.h"
 #include<iostream>
 #include"nova.h"
 

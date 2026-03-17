@@ -1,6 +1,5 @@
 #pragma once
 #include"event.h"
-#include<sstream>
 
 namespace nova{
     class NOVA_API WindowResizeEvent : public Event{

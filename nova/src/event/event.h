@@ -1,6 +1,5 @@
 #pragma once
-#include<string>
-#include<functional>
+#include"novapch.h"
 
 namespace nova{
     enum class event_type{
