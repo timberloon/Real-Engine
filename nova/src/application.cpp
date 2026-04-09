@@ -1,3 +1,4 @@
+#include"novapch.h"
 #include"application.h"
 #include"event/applicationevent.h"
 #include"log.h"

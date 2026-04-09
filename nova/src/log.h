@@ -1,9 +1,8 @@
 #pragma once
 
-#include<spdlog/spdlog.h>
-#include<spdlog/sinks/stdout_color_sinks.h>
 #include"core.h"
-
+#include<spdlog/spdlog.h>
+#include<spdlog/sinks/sink-inl.h>
 #include<memory>
 
 namespace nova{
@@ -18,5 +17,7 @@ namespace nova{
         static std::shared_ptr<spdlog::logger> get_client_logger(){ return client_logger;};
         static std::shared_ptr<spdlog::logger> get_app_logger(){ return core_logger;};
         static void log_to_client();
+        static void log_error(std::string msg);
+        static void log_error(const char* msg);
     };
 }

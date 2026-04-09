@@ -1,3 +1,4 @@
+#include"novapch.h"
 #include"log.h"
 
 namespace nova{
@@ -16,5 +17,13 @@ namespace nova{
 
     void log::log_to_client(){
         client_logger->info("hellow :)");
+    }
+
+    void log::log_error(std::string msg){
+        client_logger->error(msg.c_str());
+    }
+
+    void log::log_error(const char* msg){
+        client_logger->error(msg);
     }
 }

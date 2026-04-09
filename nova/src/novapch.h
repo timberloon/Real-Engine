@@ -9,6 +9,10 @@
 #include<unordered_map>
 #include<unordered_set>
 
+
+#include<spdlog/spdlog.h>
+#include<spdlog/sinks/stdout_color_sinks.h>
+
 #ifdef WIN_32
     #include<windows.h>
 #endif

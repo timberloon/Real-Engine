@@ -7,3 +7,6 @@
 #include"src/log.h"
 
 //? --------- events -------------------
+#include"event/applicationevent.h"
+#include"event/keyevent.h"
+#include"event/mouseevent.h"
