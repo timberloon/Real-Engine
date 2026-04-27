@@ -1,7 +1,5 @@
-#include"nova/src/novapch.h"
+#include"nova/novapch.h"
 #include"nova.h"
-#include<GL/glew.h>
-#include<GLFW/glfw3.h>
 
 #define sf(x) x*sizeof(float)
 #define si(x) x*sizeof(int)
@@ -24,25 +22,46 @@ int main(){
         return 1;
     }
 
-    float vertices[] = {
-        -0.5f, -0.5f,
-         0.5f, -0.5f,
-         0.0f,  0.5f
+    float points[] = {
+        0.0f,0.0f,
+        0.5f,0.0f,
+        0.25f,0.43f,
+        -0.25f,0.43f,
+        -0.5f,0.0f,
+        -0.25f,-0.43f,
+        0.25f,-0.43f
     };
 
-    GLuint buff;
-    glGenBuffers(1,&buff);
-    glBindBuffer(GL_ARRAY_BUFFER,buff);
+    uint indices[] = {
+        0,1,2,
+        0,2,3,
+        0,3,4,
+        0,4,5,
+        0,5,6,
+        0,6,1
+    };
 
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0,2,GL_FLOAT,GL_FALSE,sf(2),0);
+    nova::BufferLayout layout;
+    layout.push<float>(2);
 
-    glBufferData(GL_ARRAY_BUFFER,6*sizeof(vertices),vertices,GL_STATIC_DRAW);
+    nova::VertexBuffer vbo(points,sizeof(points));
+    
+    nova::VertexArray vao;
+    vao.addBuffer(vbo,layout);
+    
+    nova::IndexBuffer ibo(indices,18);
+
+    std::string vert = "nova/src/renderer/shaders/vertex.glsl";
+    std::string frag = "nova/src/renderer/shaders/fragment.glsl";   
+    nova::shader shd(vert,frag);
+
+    nova::renderer ren;
 
     while(!glfwWindowShouldClose(wnd)){
         glClear(GL_COLOR_BUFFER_BIT);
-
-        glDrawArrays(GL_TRIANGLES,0,3);
+        
+        shd.addUniform4f("u_clr",0.43,0.77,0.66,1.0);
+        ren.draw(vao,ibo,shd);
 
         glfwSwapBuffers(wnd);
         glfwPollEvents();
