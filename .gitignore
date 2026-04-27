@@ -13,6 +13,8 @@ dist/
 *.out
 *.a
 *.so
+*.h.gch
+*.gch
 
 # ======================
 # Debug / temporary files
