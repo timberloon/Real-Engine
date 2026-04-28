@@ -16,7 +16,7 @@ namespace nova{
     }
 
     void log::log_to_client(){
-        client_logger->info("hellow :)");
+        client_logger->info("Welcome to Nova\n");
     }
 
     void log::log_error(std::string msg){

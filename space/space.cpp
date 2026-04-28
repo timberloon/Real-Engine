@@ -1,9 +1,6 @@
 #include"nova/novapch.h"
 #include"nova.h"
 
-#define sf(x) x*sizeof(float)
-#define si(x) x*sizeof(int)
-
 int main(){
     nova::log my_logger;
     my_logger.init();

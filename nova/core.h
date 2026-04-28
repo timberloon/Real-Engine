@@ -17,3 +17,6 @@
 #endif
 
 #define BIT(x) (1<<x)
+#define sf(x) x*sizeof(float)
+#define si(x) x*sizeof(int)
+#define sui(x) x*sizeof(uint)

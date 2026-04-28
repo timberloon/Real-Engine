@@ -13,5 +13,6 @@ namespace nova{
         void unbind();
 
         inline uint get_id(){return m_buff;}
+        inline uint get_count(){return m_count;}
     };
 }

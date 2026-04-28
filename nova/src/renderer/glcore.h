@@ -9,10 +9,6 @@
 #include<sstream>
 #include<cstdlib>
 
-#define sf(x) x*sizeof(float)
-#define si(x) x*sizeof(int)
-#define sui(x) x*sizeof(uint)
-
 #define glerr(x) clearerror();\
     x;\
     assert(!geterrors(#x,__FILE__,__LINE__))
