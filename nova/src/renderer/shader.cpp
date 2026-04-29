@@ -79,3 +79,15 @@ void nova::shader::addUniform4f(const char* attrib,float a,float b,float c,float
     }
     glerr(glUniform4f(loc,a,b,c,d));
 }
+
+void nova::shader::addUinform1i(const char* attrib,int a){
+    glerr(auto loc = glGetUniformLocation(m_program,attrib));
+
+    if(loc == -1){
+        std::stringstream ss;
+        ss << "unable to find attribute: " << attrib << '\n';
+        mylogger.log_error(ss.str());
+        std::abort();
+    }
+    glerr(glUniform1i(loc,a));
+}

@@ -10,8 +10,8 @@
 #include<unordered_set>
 
 
-#include<spdlog/spdlog.h>
-#include<spdlog/sinks/stdout_color_sinks.h>
+#include<src/vendors/spdlog/spdlog.h>
+#include<src/vendors/spdlog/sinks/stdout_color_sinks.h>
 
 #include<GL/glew.h>
 #include<GLFW/glfw3.h>

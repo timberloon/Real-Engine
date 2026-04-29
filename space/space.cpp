@@ -1,6 +1,7 @@
 #include"nova/novapch.h"
 #include"nova.h"
 
+
 int main(){
     nova::log my_logger;
     my_logger.init();
@@ -11,7 +12,7 @@ int main(){
         return 1;
     }
 
-    auto wnd = glfwCreateWindow(800,600,"Nova",NULL,NULL);
+    auto wnd = glfwCreateWindow(1280,720,"Nova",NULL,NULL);
     glfwMakeContextCurrent(wnd);
 
     if(!glewInit()){
@@ -20,25 +21,19 @@ int main(){
     }
 
     float points[] = {
-        0.0f,0.0f,
-        0.5f,0.0f,
-        0.25f,0.43f,
-        -0.25f,0.43f,
-        -0.5f,0.0f,
-        -0.25f,-0.43f,
-        0.25f,-0.43f
+        -0.5f, -0.5f,   0.0f,0.0f, // 0 
+         0.5f, -0.5f,   1.0f,0.0f,// 1
+         0.5f,  0.5f,   1.0f,1.0f,// 2
+        -0.5f,  0.5f,   0.0f,1.0f// 3
     };
 
     uint indices[] = {
-        0,1,2,
-        0,2,3,
-        0,3,4,
-        0,4,5,
-        0,5,6,
-        0,6,1
+        0,1,3,
+        1,2,3
     };
 
     nova::BufferLayout layout;
+    layout.push<float>(2);
     layout.push<float>(2);
 
     nova::VertexBuffer vbo(points,sizeof(points));
@@ -52,13 +47,21 @@ int main(){
     std::string frag = "nova/src/renderer/shaders/fragment.glsl";   
     nova::shader shd(vert,frag);
 
+    nova::texture TreeTexture("assets/summer_tree.png",false,GL_NEAREST,0);
+    std::string texvert = "nova/src/renderer/shaders/texturevert.glsl";
+    std::string texfrag = "nova/src/renderer/shaders/texturefrag.glsl"; 
+    nova::shader TextureShader(texvert,texfrag);
+    
+
     nova::renderer ren;
 
     while(!glfwWindowShouldClose(wnd)){
         glClear(GL_COLOR_BUFFER_BIT);
         
-        shd.addUniform4f("u_clr",0.43,0.77,0.66,1.0);
-        ren.draw(vao,ibo,shd);
+        // shd.addUniform4f("u_clr",0.43,0.77,0.66,1.0);
+        // ren.draw(vao,ibo,shd);
+        TextureShader.addUinform1i("myTexture",0);
+        ren.draw(vao,ibo,TextureShader);
 
         glfwSwapBuffers(wnd);
         glfwPollEvents();
@@ -67,3 +70,4 @@ int main(){
     glfwTerminate();
     return 0;
 }
+    

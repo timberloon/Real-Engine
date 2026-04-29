@@ -24,3 +24,8 @@
 #include"src/renderer/vertexarray.h"
 #include"src/renderer/shader.h"
 #include"src/renderer/renderer.h"
+#include"src/renderer/texture.h"
+
+//? -------- input ----------------------
+#include"src/input/input.h"
+#include"src/input/keycodes.h"
