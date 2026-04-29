@@ -5,6 +5,7 @@ build/
 bin/
 out/
 dist/
+assets/
 
 # Compiled files
 *.o

@@ -33,7 +33,9 @@ namespace nova{
         inline void unbind() const{glerr(glUseProgram(0));}
 
         void addUniform4f(const char* attrib,float a,float b,float c,float d);
-        void addUinform1i(const char* attrib,int a);
+        void addUniform1i(const char* attrib,int a);
+        void addUniform1f(const char* attrib,float a);
+        void addUniform2f(const char* attrib,float a,float b);
         
         inline uint getVertexShader(){return m_VertexShader;}
         inline uint getFragmentShader(){return m_FragmentShader;}

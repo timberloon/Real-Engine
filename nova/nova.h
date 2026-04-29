@@ -1,10 +1,9 @@
 #pragma once
 
-//? --------- main application ---------
+//? --------- engine core --------------
 #include"src/engine/application.h"
-
-//? --------- logger -------------------
 #include"src/engine/log.h"
+#include"src/engine/window.h"
 
 //? --------- events -------------------
 #include"src/event/applicationevent.h"

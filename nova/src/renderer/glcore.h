@@ -17,13 +17,11 @@ inline void clearerror(){
     while(glGetError() != GL_NO_ERROR);
 }
 
-static nova::log mylogger;
-
 inline bool geterrors(const char* function, const char* file, uint line){
     while(auto error = glGetError()){
         std::stringstream strm;
         strm<< error << " in function: " << function << " in the file: " << file << " on line: " << line << '\n';
-        mylogger.log_error(strm.str());
+        nova::log::log_error(strm.str());
         return true;
     }
     return false;

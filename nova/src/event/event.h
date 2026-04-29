@@ -50,7 +50,7 @@ namespace nova{
 
         template<typename t>
         bool dispatch(t event){
-            if(m_event.get_event_type == t::get_static_type()){
+            if(m_event.get_event_type() == t::get_static_type()){
                 m_event.m_handeled = func(*(t*)& m_event);
                 return true;
             }
