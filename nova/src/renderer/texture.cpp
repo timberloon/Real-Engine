@@ -5,8 +5,14 @@
 
 nova::texture::texture(const char* filepath,bool flipped,int texture_filter,int gltexture_location)
      : m_flipped(flipped), m_TextureFilter(texture_filter),m_location(gltexture_location){
-        stbi_set_flip_vertically_on_load(!flipped);
-        u_char* data = stbi_load(filepath,&m_width,&m_height,&m_channels,0);
+        stbi_set_flip_vertically_on_load(flipped);
+
+        unsigned char* data = nullptr;
+        if(m_map.find(filepath) != m_map.end()) data = m_map[filepath];
+        else {
+            data = stbi_load(filepath,&m_width,&m_height,&m_channels,0);
+            m_map[filepath] = data;
+        }
 
         if(data == nullptr){
             std::stringstream s;

@@ -1,5 +1,6 @@
 #pragma once
 #include"glcore.h"
+#include<unordered_map>
 
 namespace nova{
     class NOVA_API texture{
@@ -8,6 +9,8 @@ namespace nova{
         uint m_textureId;
         int m_TextureFilter;
         int m_location;
+
+        std::unordered_map<const char*,unsigned char*> m_map;
     public:
         texture(const char* filepath,bool flipped,int texture_filter,int gltexture_location);
         //* texture filter - nearest for pixel art, linear for smooth images.

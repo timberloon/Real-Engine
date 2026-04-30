@@ -5,7 +5,7 @@ namespace nova{
     class NOVA_API VertexBuffer{
         uint buff;
     public:
-        VertexBuffer(const void* data, uint size);
+        VertexBuffer(const void* data, unsigned int size);
         ~VertexBuffer();
 
         void bind();
