@@ -24,6 +24,8 @@
 #include"src/renderer/shader.h"
 #include"src/renderer/renderer.h"
 #include"src/renderer/texture.h"
+#include"src/renderer/Srect.h"
+#include"src/renderer/texturerect.h"
 
 //? -------- input ----------------------
 #include"src/input/input.h"

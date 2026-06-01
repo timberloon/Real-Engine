@@ -90,7 +90,7 @@ int main(){
         // ----------------------------------------------------------
         // Texture
         // ----------------------------------------------------------
-        nova::texture tree("assets/summer_tree.png", false, GL_NEAREST, 0);
+        nova::texture tree("assets/summer_tree.png", true, GL_NEAREST, 0);
 
         nova::renderer ren;
 

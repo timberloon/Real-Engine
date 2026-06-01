@@ -14,5 +14,6 @@ namespace nova{
         void SwapBuffers();
         void update();
         void PollEvents();
+        void clear();
     };
 }

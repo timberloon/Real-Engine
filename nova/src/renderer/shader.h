@@ -27,10 +27,12 @@ namespace nova{
 
     public:
         shader(const std::string& vertpath,const std::string& fragpath);
+        shader(){}
         ~shader();
 
         inline void bind() const{glerr(glUseProgram(m_program));}
         inline void unbind() const{glerr(glUseProgram(0));}
+        void define(const std::string& vertpath,const std::string& fragpath);
 
         void addUniform4f(const char* attrib,float a,float b,float c,float d);
         void addUniform1i(const char* attrib,int a);

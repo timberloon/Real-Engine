@@ -14,6 +14,7 @@ namespace nova{
     public:
         texture(const char* filepath,bool flipped,int texture_filter,int gltexture_location);
         //* texture filter - nearest for pixel art, linear for smooth images.
+        texture(){}
         ~texture();
 
         void bind();

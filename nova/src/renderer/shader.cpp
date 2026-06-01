@@ -69,6 +69,7 @@ nova::shader::~shader(){
 }
 
 void nova::shader::addUniform4f(const char* attrib,float a,float b,float c,float d){
+    bind();
     glerr(auto loc = glGetUniformLocation(m_program,attrib));
 
     if(loc == -1){
@@ -81,6 +82,7 @@ void nova::shader::addUniform4f(const char* attrib,float a,float b,float c,float
 }
 
 void nova::shader::addUniform1i(const char* attrib,int a){
+    bind();
     glerr(auto loc = glGetUniformLocation(m_program,attrib));
 
     if(loc == -1){
@@ -93,6 +95,7 @@ void nova::shader::addUniform1i(const char* attrib,int a){
 }
 
 void nova::shader::addUniform1f(const char* attrib,float a){
+    bind();
     glerr(auto loc = glGetUniformLocation(m_program,attrib));
 
     if(loc == -1){
@@ -105,6 +108,7 @@ void nova::shader::addUniform1f(const char* attrib,float a){
 }
 
 void nova::shader::addUniform2f(const char* attrib,float a,float b){
+    bind();
     glerr(auto loc = glGetUniformLocation(m_program,attrib));
 
     if(loc == -1){
@@ -114,4 +118,28 @@ void nova::shader::addUniform2f(const char* attrib,float a,float b){
         std::abort();
     }
     glerr(glUniform2f(loc,a,b));
+}
+
+void nova::shader::define(const std::string& vertpath,const std::string& fragpath){
+    std::string vertstr = openshader(vertpath);
+    const char* vertsrc = vertstr.c_str();
+    m_VertexShader = glCreateShader(GL_VERTEX_SHADER);
+    glerr(glShaderSource(m_VertexShader,1,&vertsrc,nullptr));
+    glerr(glCompileShader(m_VertexShader));
+    compileCheck(m_VertexShader);
+
+    std::string fragstr = openshader(fragpath);
+    const char* fragsrc = fragstr.c_str();
+    m_FragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+    glerr(glShaderSource(m_FragmentShader,1,&fragsrc,nullptr));
+    glerr(glCompileShader(m_FragmentShader));
+    compileCheck(m_FragmentShader);
+    
+    glerr(m_program = glCreateProgram());
+    linkshaders(m_program,m_VertexShader,m_FragmentShader);
+    glerr(glLinkProgram(m_program));
+    linkCheck(m_program);
+
+    nova::log::log_message("Successfully created shader\n");
+    bind();
 }

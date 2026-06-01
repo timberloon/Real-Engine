@@ -1,54 +1,29 @@
 #include"nova/novapch.h"
 #include"nova.h"
 
-
 int main(){
     nova::log::init();
     nova::log::log_to_client();
 
-    nova::window mywindow(1280,720,"nova");
+    nova::window mywindow(950,630,"nova");
 
     {   
-        float points[] = {
-            -0.5f, -0.5f,   0.0f,0.0f,  // 0 
-            0.5f, -0.5f,   1.0f,0.0f,  // 1
-            0.5f,  0.5f,   1.0f,1.0f,  // 2
-            -0.5f,  0.5f,   0.0f,1.0f   // 3
-        };
-
-        uint indices[] = {
-            0,1,3,
-            1,2,3
-        };
-
-        nova::BufferLayout layout;
-        layout.push<float>(2);
-        layout.push<float>(2);
-
-        nova::VertexBuffer vbo(points,sizeof(points));
+        nova::TextureRect sky("assets/cloudy_sky1.png",-1,-1,2,2,true,GL_NEAREST,0);
+        nova::TextureRect cloud("assets/cloud.png",0,0,1,0.7,true,GL_NEAREST,1);
+        nova::TextureRect hillfar("assets/hill_far.png",-1,-1,2,2,true,GL_NEAREST,2);
+        nova::TextureRect hillnear("assets/hill_near.png",-1,-1,2,2,true,GL_NEAREST,3);
+        nova::TextureRect trees("assets/trees.png",-1,-1,2,2,true,GL_NEAREST,4);
         
-        nova::VertexArray vao;
-        vao.addBuffer(vbo,layout);
-        
-        nova::IndexBuffer ibo(indices,6);
-
-        std::string vert = "nova/src/renderer/shaders/vertex.glsl";
-        std::string frag = "nova/src/renderer/shaders/fragment.glsl";   
-        nova::shader PlainShader(vert,frag);
-
-        nova::texture TreeTexture("assets/summer_tree.png",false,GL_NEAREST,0);
-        std::string texvert = "nova/src/renderer/shaders/texturevert.glsl";
-        std::string texfrag = "nova/src/renderer/shaders/texturefrag.glsl"; 
-        nova::shader TextureShader(texvert,texfrag);
-        
-
         nova::renderer ren;
-
+        
         while(!mywindow.ShouldClose()){
-            glClear(GL_COLOR_BUFFER_BIT);
+            mywindow.clear();
             
-            TextureShader.addUniform1i("myTexture",0);
-            ren.draw(vao,ibo,TextureShader);
+            // ren.draw(sky);
+            ren.draw(cloud);
+            // ren.draw(hillfar);
+            // ren.draw(hillnear);
+            // ren.draw(trees);
 
             mywindow.SwapBuffers();
             mywindow.PollEvents();
@@ -58,4 +33,3 @@ int main(){
 
     return 0;
 }
-    

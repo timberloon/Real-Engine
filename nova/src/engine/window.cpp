@@ -47,3 +47,7 @@ void nova::window::update(){
 void nova::window::PollEvents(){
     glfwPollEvents();
 }
+
+void nova::window::clear(){
+    glClear(GL_COLOR_BUFFER_BIT);
+}
