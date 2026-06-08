@@ -3,7 +3,7 @@
 nova::VertexBuffer::VertexBuffer(const void* data,unsigned int size){
     glerr(glGenBuffers(1,&buff));
     glBindBuffer(GL_ARRAY_BUFFER,buff);
-    glerr(glBufferData(GL_ARRAY_BUFFER,size,data,GL_STATIC_DRAW));
+    glerr(glBufferData(GL_ARRAY_BUFFER,size,data,GL_DYNAMIC_DRAW));
 }
 
 nova::VertexBuffer::~VertexBuffer(){
@@ -21,5 +21,5 @@ void nova::VertexBuffer::unbind(){
 void nova::VertexBuffer::addData(const void* data,unsigned int size){
     glerr(glGenBuffers(1,&buff));
     glBindBuffer(GL_ARRAY_BUFFER,buff);
-    glerr(glBufferData(GL_ARRAY_BUFFER,size,data,GL_STATIC_DRAW));
+    glerr(glBufferData(GL_ARRAY_BUFFER,size,data,GL_DYNAMIC_DRAW));
 }

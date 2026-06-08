@@ -27,8 +27,8 @@ nova::texture::texture(const char* filepath,bool flipped,int texture_filter,int 
         glerr(glBindTexture(GL_TEXTURE_2D,m_textureId));
         glerr(glTexImage2D(GL_TEXTURE_2D,0,format,m_width,m_height,0,format,GL_UNSIGNED_BYTE,data));
 
-        glerr(glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT));
-        glerr(glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT));
+        glerr(glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE));
+        glerr(glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE));
         glerr(glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,m_TextureFilter));
         glerr(glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,m_TextureFilter));
 

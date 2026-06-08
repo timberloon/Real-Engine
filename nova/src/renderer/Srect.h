@@ -26,11 +26,12 @@ namespace nova{
         void bind();
         void unbind();
         void addColor(float r,float g,float b,float a);
+        void updatePos(float x,float y);
 
         inline float getWidth(){return m_width;}
         inline float getHeight(){return m_height;}
         inline nova::vec2 getPos(){return m_pos;}
-        inline float geXpos(){return m_pos.x;}
+        inline float getXpos(){return m_pos.x;}
         inline float getYpos(){return m_pos.y;}
 
         inline nova::VertexArray& getVertexArray(){return m_vao;}

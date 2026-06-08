@@ -4,6 +4,7 @@
 #include"src/engine/application.h"
 #include"src/engine/log.h"
 #include"src/engine/window.h"
+#include"src/engine/scene.h"
 
 //? --------- events -------------------
 #include"src/event/applicationevent.h"
@@ -11,8 +12,6 @@
 #include"src/event/mouseevent.h"
 
 //? ------ entity component system -----
-#include"src/ecs/ecsmanager.h"
-#include"src/ecs/entity.h"
 #include"src/ecs/system.h"
 #include"src/ecs/component.h"
 

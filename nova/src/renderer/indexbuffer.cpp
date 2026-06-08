@@ -3,7 +3,7 @@
 nova::IndexBuffer::IndexBuffer(const uint* data,uint count) : m_count(count){
     glerr(glGenBuffers(1,&m_buff));
     glerr(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,m_buff));
-    glerr(glBufferData(GL_ELEMENT_ARRAY_BUFFER,sui(m_count),data,GL_STATIC_DRAW));
+    glerr(glBufferData(GL_ELEMENT_ARRAY_BUFFER,sui(m_count),data,GL_DYNAMIC_DRAW));
 }
 
 nova::IndexBuffer::~IndexBuffer(){
@@ -22,5 +22,5 @@ void nova::IndexBuffer::addData(const uint* data,uint count){
     m_count = count;
     glerr(glGenBuffers(1,&m_buff));
     glerr(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,m_buff));
-    glerr(glBufferData(GL_ELEMENT_ARRAY_BUFFER,sui(m_count),data,GL_STATIC_DRAW));
+    glerr(glBufferData(GL_ELEMENT_ARRAY_BUFFER,sui(m_count),data,GL_DYNAMIC_DRAW));
 }

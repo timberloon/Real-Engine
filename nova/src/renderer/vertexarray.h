@@ -11,6 +11,7 @@ namespace nova{
         ~VertexArray();
 
         void addBuffer(VertexBuffer& vb,BufferLayout& lay);
+        void addBuffer(VertexBuffer* vb,BufferLayout* lay);
 
         void bind();
         void unbind();

@@ -15,7 +15,7 @@ namespace nova{
         uint m_indices[6];
         float m_width,m_height;
         nova::vec2 m_pos;
-        int m_offset;
+        int m_texture_location_offset;
 
         nova::VertexArray m_vao;
         nova::VertexBuffer m_vbo;
@@ -32,13 +32,14 @@ namespace nova{
 
         void bind();
         void unbind();
+        void updatePos(float x,float y);
 
         inline float getWidth(){return m_width;}
         inline float getHeight(){return m_height;}
         inline nova::vec2 getPos(){return m_pos;}
-        inline float geXpos(){return m_pos.x;}
+        inline float getXpos(){return m_pos.x;}
         inline float getYpos(){return m_pos.y;}
-        inline int getOffset(){return m_offset;}
+        inline int getOffset(){return m_texture_location_offset;}
 
         inline nova::VertexArray& getVertexArray(){return m_vao;}
         inline nova::VertexBuffer& getVertexBuffer(){return m_vbo;}

@@ -39,3 +39,17 @@ void nova::Srect::unbind(){
     m_ibo.unbind();
     m_shader.unbind();
 }
+
+void nova::Srect::updatePos(float x,float y){
+    bind();
+    this->m_pos.x = x;
+    this->m_pos.y = y;
+
+    m_points[0] = x;               m_points[1] = y;
+    m_points[2] = x+this->m_width; m_points[3] = y;
+    m_points[4] = x+this->m_width; m_points[5] = y+this->m_height;
+    m_points[6] = x;               m_points[7] = y+this->m_height;
+
+    m_vbo.addData(m_points,sizeof(m_points));
+    m_vao.addBuffer(m_vbo,m_layout);
+}

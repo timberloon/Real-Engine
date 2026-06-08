@@ -37,3 +37,23 @@ void nova::VertexArray::addBuffer(nova::VertexBuffer& vb,nova::BufferLayout& lay
         offset += element.count * getSizeOfType(element.type);
     }
 }
+
+void nova::VertexArray::addBuffer(nova::VertexBuffer* vb,nova::BufferLayout* lay){
+    vb->bind();
+    auto elements = lay->getElements();
+    uint offset = 0;
+
+    for(std::size_t i = 0;i<elements.size();i++){
+        auto element = elements[i];
+        glerr(glEnableVertexAttribArray(i));
+        glerr(glVertexAttribPointer(
+            i,
+            element.count,
+            element.type,
+            element.normalised,
+            lay->getStride(),
+            (const void*)(uintptr_t) offset
+        ));
+        offset += element.count * getSizeOfType(element.type);
+    }
+}

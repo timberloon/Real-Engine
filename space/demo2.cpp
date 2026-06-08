@@ -1,86 +1,46 @@
-#include"nova/novapch.h"
-#include"nova/nova.h"
+#include"novapch.h"
+#include"nova.h"
 
 int main(){
     nova::log::init();
     nova::log::log_to_client();
 
-    nova::window mywindow(1280,720,"demo");
-    { 
-        // float bg[] = {
-        //     -1.0f, 1.0f,     0.0f,0.0f, //0
-        //     -1.0f,-1.0f,     0.0f,1.0f, //1
-        //     1.0f,-1.0f,     1.0f,1.0f, //2
-        //     1.0f, 1.0f,     1.0f,0.0f  //3
-        // };
-        float bg[] = {
-            -1.0f/2, 1.0f/2,     0.0f,0.0f, //0
-            -1.0f/2,-1.0f/2,     0.0f,1.0f, //1
-            1.0f/2,-1.0f/2,     1.0f,1.0f, //2
-            1.0f/2, 1.0f/2,     1.0f,0.0f  //3
-        };
+    {
+        nova::window myWindow(720,600,"MyWindow");
 
-        uint indices[] = {
-            0,1,2,
-            0,2,3
-        };
+        nova::scene myScene;
+        auto pos = myScene.createComponent<nova::TransformComponent>(-0.5,0,0.5,0.5);
+        auto clr = myScene.createComponent<nova::ColorComponent>(0.43,0.67,0.21,1.0);
+        auto sprite = myScene.createComponent<nova::SpriteComponent>("assets/cloud.png",-0.5f,-0.5f,1.0f,1.0f,true,GL_NEAREST,0);
 
-        nova::BufferLayout layout;
-        layout.push<float>(2);
-        layout.push<float>(2);
+        auto e = myScene.createEntity();
+        myScene.addComponentToEntity(e,pos,sprite);
 
-        nova::VertexBuffer vbo(bg,sizeof(bg));
+        // nova::BufferLayout layout;
+        // layout.push<float>(2);
+        // layout.push<float>(2);
+        // nova::VertexBuffer vbo(sprite->m_points,sizeof(sprite->m_points));
+        // nova::VertexArray vao;
+        // vao.addBuffer(vbo,layout);
+        // nova::IndexBuffer ibo(pos->m_indices,6);
 
-        nova::VertexArray vao;
-        vao.addBuffer(vbo,layout);
+        // nova::shader texShader("nova/src/renderer/shaders/texturevert.glsl","nova/src/renderer/shaders/texturefrag.glsl");
+        // texShader.bind();
 
-        nova::IndexBuffer ibo(indices,6);
+        // nova::texture cloudTexture(sprite->m_texturePath,sprite->m_flipped,sprite->m_textureFilter,sprite->m_texture_location_offset);
+        // cloudTexture.bind();
 
+        nova::renderer ren;
 
-        std::string vert = "nova/src/renderer/shaders/vertex.glsl";
-        std::string frag = "nova/src/renderer/shaders/fragment.glsl";   
-        nova::shader PlainShader(vert,frag);
+        while(!myWindow.ShouldClose()){
+            myWindow.clear();
 
-        nova::texture bgTexture("assets/hill_far.png",false,GL_NEAREST,0);
-        std::string texvert = "nova/src/renderer/shaders/texturevert.glsl";
-        std::string texfrag = "nova/src/renderer/shaders/texturefrag.glsl"; 
-        nova::shader TextureShader(texvert,texfrag);
+            myScene.draw(e);
+            // ren.draw(vao,ibo,texShader);
 
-        nova::renderer paint;
-
-        nova::texture fgTexture("assets/hill_near.png",false,GL_NEAREST,1);
-        nova::texture skyTexture("assets/cloudy_sky1.png",false,GL_NEAREST,2);
-        nova::texture treeTexture("assets/trees.png",false,GL_NEAREST,3);
-        nova::texture cloud("assets/cloud.png",false,GL_NEAREST,4);
-
-        while(!mywindow.ShouldClose()){
-            glClear(GL_COLOR_BUFFER_BIT);
-
-            // skyTexture.bind();
-            // TextureShader.addUniform1i("myTexture",2);
-            // paint.draw(vao,ibo,TextureShader);
-
-            // fgTexture.bind();
-            // TextureShader.addUniform1i("myTexture", 1);
-            // paint.draw(vao, ibo, TextureShader);
-                
-            // bgTexture.bind();
-            // TextureShader.addUniform1i("myTexture", 0); 
-            // paint.draw(vao, ibo, TextureShader);
-
-            // treeTexture.bind();
-            // TextureShader.addUniform1i("myTexture",3);
-            // paint.draw(vao,ibo,TextureShader);
-
-            cloud.bind();
-            TextureShader.addUniform1i("myTexture",4);
-            paint.draw(vao,ibo,TextureShader);
-
-            mywindow.SwapBuffers();
-            mywindow.PollEvents();
-            mywindow.update();
+            myWindow.SwapBuffers();
+            myWindow.PollEvents();
+            myWindow.update();
         }
     }
-
-    return 0;
 }
