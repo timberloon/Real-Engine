@@ -1,4 +1,6 @@
 #pragma once
+#include<iostream>
+#include"core.h"
 
 namespace nova{
     enum class event_type{

@@ -29,19 +29,13 @@ namespace nova{
 
     struct NOVA_API SpriteComponent{
         inline static componentID m_componentID;
-        float m_points[16];
         int m_texture_location_offset;
         const char* m_texturePath;
         bool m_flipped;
         unsigned int m_textureFilter;
 
-        SpriteComponent(const char* path,float x,float y,float w,float h,bool flipped,unsigned int texFilter,float offset)
-        : m_flipped(flipped), m_textureFilter(texFilter), m_texturePath(path), m_texture_location_offset(offset){
-            m_points[0] = x;   m_points[1] = y;    m_points[2] = 0.0f;  m_points[3] = 0.0f;
-            m_points[4] = x+w; m_points[5] = y;    m_points[6] = 1.0f;  m_points[7] = 0.0f;
-            m_points[8] = x+w; m_points[9] = y+h;  m_points[10] = 1.0f; m_points[11] = 1.0f;
-            m_points[12] = x;  m_points[13] = y+h; m_points[14] = 0.0f; m_points[15] = 1.0f;
-        }
+        SpriteComponent(const char* path,bool flipped,unsigned int texFilter,float offset)
+        : m_flipped(flipped), m_textureFilter(texFilter), m_texturePath(path), m_texture_location_offset(offset){}
 
         inject
     };

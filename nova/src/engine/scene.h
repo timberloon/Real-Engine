@@ -5,6 +5,7 @@
 
 namespace nova{
     class NOVA_API scene{
+        bool m_alive;
         nova::registry m_registry;
         
         nova::BufferLayout* m_layout;
@@ -19,7 +20,6 @@ namespace nova{
     public:
         scene();
         void draw(entity& e);
-        void draw(entity& e,nova::BufferLayout& lay,nova::VertexArray& vao,nova::VertexBuffer& vbo,nova::IndexBuffer& ibo,nova::renderer& ren);
         inline entity createEntity(){return m_registry.createEntity();} 
         
         template<typename...componentTypes>
@@ -35,5 +35,8 @@ namespace nova{
 
         inline nova::shader& getSolidShader(){return m_solidShader;}
         inline nova::shader& getTextureShader(){return m_textureShader;}
+        inline void kill(){m_alive = false;}
+        inline void revive(){m_alive = true;}
+        inline bool isAlive(){return m_alive;}
     };
 }

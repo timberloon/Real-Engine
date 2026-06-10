@@ -17,10 +17,17 @@ int main(){
 
         myScene.addComponentToEntity(player,playerPos,playerSprite);
 
+        auto clock = std::chrono::high_resolution_clock();
+        auto temp = clock.now();
+        std::chrono::_V2::system_clock::time_point buff;
+        std::chrono::seconds interval(3);
+
         while(!myWindow.ShouldClose()){
             myWindow.clear();
 
             myScene.draw(player);
+            buff = clock.now();
+            if(buff-temp > interval)myScene.kill();
 
             myWindow.SwapBuffers();
             myWindow.PollEvents();

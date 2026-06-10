@@ -1,6 +1,7 @@
 #include"scene.h"
 
 nova::scene::scene(){
+    this->m_alive = true;
     m_solidShader.define("nova/src/renderer/shaders/vertex.glsl","nova/src/renderer/shaders/fragment.glsl");
     m_textureShader.define("nova/src/renderer/shaders/texturevert.glsl","nova/src/renderer/shaders/texturefrag.glsl");
 
@@ -11,6 +12,7 @@ nova::scene::scene(){
 }
 
 void nova::scene::draw(entity& e){
+    if(!m_alive) return;
     auto transform = m_registry.getComponent<TransformComponent>(e);
     auto sprite = m_registry.getComponent<SpriteComponent>(e);
     auto color = m_registry.getComponent<ColorComponent>(e);
@@ -22,10 +24,16 @@ void nova::scene::draw(entity& e){
 
     if(!transform) return;
     if(sprite){
+        float points[16];
+        points[0] =  transform->m_points[0];  points[1] =  transform->m_points[1];  points[2] = 0.0f;  points[3] = 0.0f;
+        points[4] =  transform->m_points[2];  points[5] =  transform->m_points[3];  points[6] = 1.0f;  points[7] = 0.0f;
+        points[8] =  transform->m_points[4];  points[9] =  transform->m_points[5];  points[10] = 1.0f; points[11] = 1.0f;
+        points[12] = transform->m_points[6];  points[13] = transform->m_points[7];  points[14] = 0.0f; points[15] = 1.0f;
+
         m_layout = new nova::BufferLayout();
         m_layout->push<float>(2);
         m_layout->push<float>(2);
-        m_vbo = new nova::VertexBuffer(sprite->m_points,sizeof(sprite->m_points));
+        m_vbo = new nova::VertexBuffer(points,sizeof(points));
         m_vao = new nova::VertexArray;
         m_vao->addBuffer(m_vbo,m_layout);
         m_ibo = new nova::IndexBuffer(transform->m_indices,6);

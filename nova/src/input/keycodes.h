@@ -10,7 +10,6 @@
 #define NOVA_KEY_DOWN           264
 #define NOVA_KEY_LEFT_SHIFT     340
 #define NOVA_KEY_LEFT_CONTROL   341
-// ... F1–F12, KP_*, full set in the downloaded file
 
 #define NOVA_MOUSE_BUTTON_LEFT  0
 #define NOVA_MOUSE_BUTTON_RIGHT 1
