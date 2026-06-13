@@ -8,25 +8,14 @@ int main(){
     {
         nova::window myWindow(720,600,"MyWindow");
 
-        nova::scene myScene;
-        auto pos = myScene.createComponent<nova::TransformComponent>(-0.5,0,0.5,0.5);
-        auto clr = myScene.createComponent<nova::ColorComponent>(0.43,0.67,0.21,1.0);
-        auto sprite = myScene.createComponent<nova::SpriteComponent>("assets/cloud.png",true,GL_NEAREST,0);
-
-        auto e = myScene.createEntity();
-        myScene.addComponentToEntity(e,pos,sprite);
+        IMGUI_CHECKVERSION();
+        auto t = ImGui::CreateContext();
+        if(!t) nova::log::log_error("Failed to Create ImGui Context!\n");
         
-        auto f = myScene.createEntity();
-        myScene.addComponentToEntity(f,\
-            myScene.createComponent<nova::TransformComponent>(-0.9,-0.5,0.5,0.5),\
-            myScene.createComponent<nova::SpriteComponent>("assets/summer_tree.png",true,GL_NEAREST,1)
-        );
-
         while(!myWindow.ShouldClose()){
             myWindow.clear();
 
-            myScene.draw(e);
-            myScene.draw(f);
+            
 
             myWindow.SwapBuffers();
             myWindow.PollEvents();

@@ -13,11 +13,15 @@
 #include<array>
 
 
-#include<src/vendors/spdlog/spdlog.h>
-#include<src/vendors/spdlog/sinks/stdout_color_sinks.h>
+#include<spdlog/spdlog.h>
+#include<spdlog/sinks/stdout_color_sinks.h>
 
 #include<GL/glew.h>
 #include<GLFW/glfw3.h>
+
+#include<imgui/imgui.h>
+#include<imgui/backends/imgui_impl_glfw.h>
+#include<imgui/backends/imgui_impl_opengl3.h>
 
 #ifdef WIN_32
     #include<windows.h>

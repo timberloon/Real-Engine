@@ -2,7 +2,7 @@
 #include"log.h"
 
 nova::window::window(int width,int height,const char* title){
-        if(!glfwInit()){
+    if(!glfwInit()){
         nova::log::log_error("failed to init glfw\n");
         std::abort();
     }

@@ -1,5 +1,6 @@
-#include"novapch.h"
 #include"log.h"
+#include<spdlog/spdlog.h>
+#include<spdlog/sinks/stdout_color_sinks.h>
 
 namespace nova{
     std::shared_ptr<spdlog::logger> log::client_logger;

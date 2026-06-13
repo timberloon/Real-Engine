@@ -1,6 +1,8 @@
 #pragma once
 #include "core.h"
-
+#include<vector>
+#include<GL/glew.h>
+#include<GLFW/glfw3.h>
 namespace nova {
 
     // Abstract input interface — platform implementations override the impl_ methods.

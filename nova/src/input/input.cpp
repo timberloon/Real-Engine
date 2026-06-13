@@ -1,4 +1,3 @@
-#include "novapch.h"
 #include "input/input.h"
 #include "input/glfwinput.h"
 
