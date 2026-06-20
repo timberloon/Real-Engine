@@ -1,5 +1,6 @@
 #include"window.h"
 #include"log.h"
+#include"novaglobals.h"
 
 nova::window::window(int width,int height,const char* title){
     if(!glfwInit()){
@@ -19,6 +20,8 @@ nova::window::window(int width,int height,const char* title){
         nova::log::log_error("failed to init glew\n");
         std::abort();
     }
+
+    aspect = width/height;
 
     int fbW, fbH;
     glfwGetFramebufferSize(m_window, &fbW, &fbH);

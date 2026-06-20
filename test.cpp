@@ -1,5 +1,5 @@
 #include<iostream>
-
+#include"math.h"
 class test{
     std::string name;
 public:
@@ -8,5 +8,8 @@ public:
 };
 
 int main(){
-    test("hello");
+    std::cout<< -sin(M_PI/2);
+    if(true){
+
+    }
 }

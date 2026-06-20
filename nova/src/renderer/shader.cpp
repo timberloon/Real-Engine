@@ -120,6 +120,19 @@ void nova::shader::addUniform2f(const char* attrib,float a,float b){
     glerr(glUniform2f(loc,a,b));
 }
 
+void nova::shader::addUniformMat4(const char* attrib,nova::mat4& matrix)const{
+    bind();
+    glerr(auto loc = glGetUniformLocation(m_program,attrib));
+
+    if(loc == -1){
+        std::stringstream ss;
+        ss << "Unable to find attribute: " << attrib << '\n';
+        nova::log::log_error(ss.str());
+        std::abort();
+    }
+    glerr(glUniformMatrix4fv(loc,1,true,&matrix[0][0]));
+}
+
 void nova::shader::define(const std::string& vertpath,const std::string& fragpath){
     std::string vertstr = openshader(vertpath);
     const char* vertsrc = vertstr.c_str();

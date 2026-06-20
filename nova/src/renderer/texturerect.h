@@ -37,8 +37,8 @@ namespace nova{
         inline float getWidth(){return m_width;}
         inline float getHeight(){return m_height;}
         inline nova::vec2 getPos(){return m_pos;}
-        inline float getXpos(){return m_pos.x;}
-        inline float getYpos(){return m_pos.y;}
+        inline float getXpos(){return m_pos.a;}
+        inline float getYpos(){return m_pos.b;}
         inline int getOffset(){return m_texture_location_offset;}
 
         inline nova::VertexArray& getVertexArray(){return m_vao;}

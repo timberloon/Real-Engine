@@ -1,6 +1,7 @@
 #pragma once
 #include"ecscore.h"
 #include"component.h"
+#include<sstream>
 
 namespace nova{
     static inline componentID getComponentTypeID(){
@@ -56,7 +57,7 @@ namespace nova{
         }
 
         template<typename t>
-        t* getComponent(entity& e){
+        t* getComponent(const entity& e){
             using RawType = std::decay_t<t>;
             
             if constexpr (std::is_same_v<t,TransformComponent>)
@@ -69,5 +70,54 @@ namespace nova{
             nova::log::log_error("component not found returning null!\n");
             return nullptr;
         }
+
+        inline void TransformEntity(const entity& e,nova::mat2& transform){
+            #define component m_transform[e]
+            for(int i=0;i<8;i+=2){
+                nova::vec2 vec(component->m_points[i],component->m_points[i+1]);
+                auto temp = transform*vec;
+                std::stringstream ss;
+                ss<< "Translating: " << component->m_points[i] << ',' << component->m_points[i+1] << " -> " << temp.a << ',' <<temp.b << '\n';
+                nova::log::log_message(ss.str());
+                component->m_points[i] = temp.a;
+                component->m_points[i+1] = temp.b;
+                if(i == 0){
+                    component->m_pos = temp;
+                }
+            }
+        }
+
+        inline void TransformEntity(const entity& e,nova::mat3& transform){
+            #define component m_transform[e]
+            for(int i=0;i<8;i+=2){
+                nova::vec3 vec(component->m_points[i],component->m_points[i+1],1);
+                auto temp = transform*vec;
+                std::stringstream ss;
+                ss<< "Translating: " << component->m_points[i] << ',' << component->m_points[i+1] << " -> " << temp.a << ',' <<temp.b << '\n';
+                nova::log::log_message(ss.str());
+                component->m_points[i] = temp.a;
+                component->m_points[i+1] = temp.b;
+                if(i == 0){
+                    component->m_pos.a = temp.a;
+                    component->m_pos.b = temp.b;
+                }
+            }
+        }
+        inline void TransformEntity(const entity& e,nova::mat3&& transform){
+            #define component m_transform[e]
+            for(int i=0;i<8;i+=2){
+                nova::vec3 vec(component->m_points[i],component->m_points[i+1],1);
+                auto temp = transform*vec;
+                std::stringstream ss;
+                ss<< "Translating: " << component->m_points[i] << ',' << component->m_points[i+1] << " -> " << temp.a << ',' <<temp.b << '\n';   
+                component->m_points[i] = temp.a;
+                component->m_points[i+1] = temp.b;
+                if(i == 0){
+                    component->m_pos.a = temp.a;
+                    component->m_pos.b = temp.b;
+                }
+            }
+        }
+ 
     };
 }

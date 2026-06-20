@@ -1,14 +1,20 @@
 #include"scene.h"
 
-nova::scene::scene(){
+nova::scene::scene(float asp){
     this->m_alive = true;
     m_solidShader.define("nova/src/renderer/shaders/vertex.glsl","nova/src/renderer/shaders/fragment.glsl");
     m_textureShader.define("nova/src/renderer/shaders/texturevert.glsl","nova/src/renderer/shaders/texturefrag.glsl");
+
+    nova::mat4 matrix = nova::ortho(0,16,0,9,0,1.0);
+    m_solidShader.addUniformMat4("projection",matrix);
+    m_textureShader.addUniformMat4("projection",matrix);
 
     m_layout = nullptr;
     m_vao = nullptr;
     m_vbo = nullptr;
     m_ibo = nullptr;
+
+    m_aspect = asp;
 }
 
 void nova::scene::draw(entity& e){

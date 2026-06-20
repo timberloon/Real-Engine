@@ -2,6 +2,7 @@
 
 #include"core.h"
 #include"../engine/log.h"
+#include"math/vector.h"
 #include<GL/glew.h>
 #include<GLFW/glfw3.h>
 #include<iostream>

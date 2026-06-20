@@ -32,3 +32,6 @@
 //? -------- input ----------------------
 #include"src/input/input.h"
 #include"src/input/keycodes.h"
+
+//? -------- math -----------------------
+#include"src/math/matrix.h"

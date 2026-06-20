@@ -1,5 +1,6 @@
 #pragma once
 #include"glcore.h"
+#include"math/matrix.h"
 
 namespace nova{
 
@@ -38,7 +39,8 @@ namespace nova{
         void addUniform1i(const char* attrib,int a);
         void addUniform1f(const char* attrib,float a);
         void addUniform2f(const char* attrib,float a,float b);
-        
+        void addUniformMat4(const char* attrib,nova::mat4& matrix)const;
+
         inline uint getVertexShader(){return m_VertexShader;}
         inline uint getFragmentShader(){return m_FragmentShader;}
         inline uint getProgram(){return m_program;}

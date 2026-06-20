@@ -1,7 +1,7 @@
 #include"Srect.h"
 
-nova::Srect::Srect(float x,float y,float w,float h) : m_width(w), m_height(h), m_pos(x,y){
-
+nova::Srect::Srect(float x,float y,float w,float h) : m_width(w), m_height(h){
+    m_pos.a = x;m_pos.b = y;
     m_points[0] = x;   m_points[1] = y;
     m_points[2] = x+w; m_points[3] = y;
     m_points[4] = x+w; m_points[5] = y+h;
@@ -42,8 +42,8 @@ void nova::Srect::unbind(){
 
 void nova::Srect::updatePos(float x,float y){
     bind();
-    this->m_pos.x = x;
-    this->m_pos.y = y;
+    this->m_pos.a = x;
+    this->m_pos.b = y;
 
     m_points[0] = x;               m_points[1] = y;
     m_points[2] = x+this->m_width; m_points[3] = y;

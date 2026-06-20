@@ -7,6 +7,7 @@ namespace nova{
     class NOVA_API window{
         GLFWwindow* m_window;
     public:
+        float aspect;
         window(int width,int height,const char* title);
         ~window();
         

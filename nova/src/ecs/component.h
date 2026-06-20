@@ -1,7 +1,8 @@
 #pragma once
 #include"ecscore.h"
 namespace nova{
-    #define inject operator const componentID&(){return m_componentID;}\
+    #define inject\
+        operator const componentID&(){return m_componentID;}\
         operator componentID&(){return m_componentID;} 
 
     struct NOVA_API TransformComponent{
@@ -12,7 +13,7 @@ namespace nova{
         nova::vec2 m_pos;
 
         TransformComponent(float x,float y,float w,float h){
-            m_pos.x = x; m_pos.y = y;
+            m_pos.a = x; m_pos.b = y;
             m_width = w; m_height = h;
 
             m_points[0] = x;   m_points[1] = y;

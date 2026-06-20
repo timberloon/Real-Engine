@@ -9,6 +9,7 @@
 #include"renderer/texture.h"
 #include"renderer/vertexarray.h"
 #include"renderer/vertexbuffer.h"
+#include"math/matrix.h"
 
 #include<vector>
 #include<array>

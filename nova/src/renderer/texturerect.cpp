@@ -1,7 +1,8 @@
 #include"texturerect.h"
 
 nova::TextureRect::TextureRect(const char* path,float x,float y,float w,float h,bool flipped,int texture_filter,int texture_location_offset): \
-    m_texture_location_offset(texture_location_offset),m_width(w), m_height(h), m_pos(x,y), m_texture(path,flipped,texture_filter,texture_location_offset){
+    m_texture_location_offset(texture_location_offset),m_width(w), m_height(h), m_texture(path,flipped,texture_filter,texture_location_offset){
+        m_pos.a = x;m_pos.b = y;
         m_points[0] = x;   m_points[1] = y;    m_points[2] = 0.0f;  m_points[3] = 0.0f;
         m_points[4] = x+w; m_points[5] = y;    m_points[6] = 1.0f;  m_points[7] = 0.0f;
         m_points[8] = x+w; m_points[9] = y+h;  m_points[10] = 1.0f; m_points[11] = 1.0f;
@@ -39,8 +40,8 @@ void nova::TextureRect::unbind(){
 
 void nova::TextureRect::updatePos(float x,float y){
     bind();
-    this->m_pos.x = x;
-    this->m_pos.y = y;
+    this->m_pos.a = x;
+    this->m_pos.b = y;
 
     m_points[0] = x;                m_points[1] = y;                 
     m_points[4] = x+this->m_width ; m_points[5] = y;                 
