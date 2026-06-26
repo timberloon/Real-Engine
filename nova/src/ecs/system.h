@@ -20,9 +20,11 @@ namespace nova{
     }
 
     class NOVA_API registry {
-        componentArray(TransformComponent) m_transform;
-        componentArray(SpriteComponent) m_sprite;
-        componentArray(ColorComponent) m_color;
+        std::tuple<
+            componentArray(TransformComponent),
+            componentArray(SpriteComponent), 
+            componentArray(ColorComponent)    
+        > m_components;
         
     public:
         registry() = default;
@@ -36,43 +38,28 @@ namespace nova{
             return comp;
         }
 
-        template<typename t>
-        void addComponents(entity& e,t&& component){
-            using RawType = std::decay_t<t>;
+        template<typename component>
+        void addComponents(entity& e,std::unique_ptr<component>&& u_component){
+            auto& arr = std::get<componentArray(component)>(m_components);
+            arr[e] = std::move(u_component);
+            return;
 
-            if constexpr (std::is_same_v<RawType,std::unique_ptr<TransformComponent>>)
-                m_transform[e] = std::move(component);
-            else if constexpr(std::is_same_v<RawType,std::unique_ptr<SpriteComponent>>)
-                m_sprite[e] = std::move(component);
-            else if constexpr(std::is_same_v<RawType,std::unique_ptr<ColorComponent>>)
-                m_color[e] = std::move(component);
-
-            else nova::log::log_error("component not added\n");
-            
+            nova::log::log_error("component not added\n");
         }
         template<typename t,typename...args>
-        void addComponents(entity& e,t&& first,args&&...rest){
-            addComponents(e,std::forward<t>(first));
-            if constexpr (sizeof...(rest) > 0) addComponents(e,std::forward<args>(rest)...);
+        void addComponents(entity& e,std::unique_ptr<t>&& first,std::unique_ptr<args>&& ...rest){
+            addComponents(e,std::move(first));
+            if constexpr (sizeof...(rest) > 0) addComponents(e,std::move(rest)...);
         }
 
         template<typename t>
         t* getComponent(const entity& e){
-            using RawType = std::decay_t<t>;
-            
-            if constexpr (std::is_same_v<t,TransformComponent>)
-                return m_transform[e].get();
-            else if constexpr(std::is_same_v<t,SpriteComponent>)
-                return m_sprite[e].get();
-            else if constexpr(std::is_same_v<t,ColorComponent>)
-                return m_color[e].get();
-
-            nova::log::log_error("component not found returning null!\n");
-            return nullptr;
+            auto& array =  std::get<componentArray(t)>(m_components);
+            return array[e].get();
         }
 
         inline void TransformEntity(const entity& e,nova::mat2& transform){
-            #define component m_transform[e]
+            auto& component = std::get<componentArray(TransformComponent)>(m_components)[e];
             for(int i=0;i<8;i+=2){
                 nova::vec2 vec(component->m_points[i],component->m_points[i+1]);
                 auto temp = transform*vec;
@@ -88,7 +75,8 @@ namespace nova{
         }
 
         inline void TransformEntity(const entity& e,nova::mat3& transform){
-            #define component m_transform[e]
+            auto& component = std::get<componentArray(TransformComponent)>(m_components)[e];
+
             for(int i=0;i<8;i+=2){
                 nova::vec3 vec(component->m_points[i],component->m_points[i+1],1);
                 auto temp = transform*vec;
@@ -104,7 +92,8 @@ namespace nova{
             }
         }
         inline void TransformEntity(const entity& e,nova::mat3&& transform){
-            #define component m_transform[e]
+            auto& component = std::get<componentArray(TransformComponent)>(m_components)[e];
+
             for(int i=0;i<8;i+=2){
                 nova::vec3 vec(component->m_points[i],component->m_points[i+1],1);
                 auto temp = transform*vec;

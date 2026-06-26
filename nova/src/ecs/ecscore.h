@@ -15,6 +15,7 @@
 #include<array>
 #include<memory>
 #include<type_traits>
+#include<tuple>
 
 #define entity unsigned int
 #define componentID unsigned int

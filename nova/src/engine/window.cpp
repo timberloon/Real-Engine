@@ -54,3 +54,11 @@ void nova::window::PollEvents(){
 void nova::window::clear(){
     glClear(GL_COLOR_BUFFER_BIT);
 }
+
+void nova::window::getFrameBufferSize(int* x,int* y){
+    glfwGetFramebufferSize(m_window,x,y);
+}
+
+void nova::window::ClearColor(float r,float g,float b,float a){
+    glClearColor(r,g,b,a);
+}

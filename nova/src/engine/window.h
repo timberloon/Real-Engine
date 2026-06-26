@@ -16,5 +16,9 @@ namespace nova{
         void update();
         void PollEvents();
         void clear();
+        void getFrameBufferSize(int* x,int* y);
+        void ClearColor(float r,float g,float b,float a);
+
+        inline GLFWwindow* getWindow(){return m_window;}
     };
 }

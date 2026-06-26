@@ -25,9 +25,9 @@ namespace nova{
         inline entity createEntity(){return m_registry.createEntity();} 
         
         template<typename...componentTypes>
-        void addComponentToEntity(entity& e,componentTypes&&...others){
+        void addComponentToEntity(entity& e,std::unique_ptr<componentTypes>&&...others){
             if constexpr (sizeof...(others) > 0) 
-                m_registry.addComponents<componentTypes...>(e,std::forward<componentTypes>(others)...);
+                m_registry.addComponents<componentTypes...>(e,std::move(others)...);
         }
 
         template<typename componentType,typename...args>

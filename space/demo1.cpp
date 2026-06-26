@@ -33,7 +33,7 @@ int main(){
         while(!myWindow.ShouldClose()){
             myWindow.clear();
 
-            // myScene.draw(f);
+            myScene.draw(f);
             myScene.draw(e);
             if(!flag && time.now() - curr > interval){
                 myScene.TranslateEntity(e,2,0);
