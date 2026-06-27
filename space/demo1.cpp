@@ -8,7 +8,7 @@ int main(){
     {
         nova::window myWindow(960,540,"MyWindow");
 
-        nova::scene myScene(myWindow.aspect);
+        nova::scene myScene;
 
         auto e = myScene.createEntity();
         myScene.addComponentToEntity(

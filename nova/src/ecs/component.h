@@ -48,4 +48,32 @@ namespace nova{
 
         inject
     };
+
+    //! physics
+
+    struct NOVA_API MassComponent{
+        inline static componentID m_componentID;
+        float mass;
+        MassComponent(float x) : mass(x){}
+        inject
+    };
+    struct NOVA_API VelocityComponent{
+        inline static componentID m_componentID;
+        nova::vec2 velocity;
+        VelocityComponent(float x,float y) : velocity(x,y){}
+        inject
+    };
+    struct NOVA_API AccelarationComponent{
+        inline static componentID m_componentID;
+        nova::vec2 acc;
+        AccelarationComponent(float x,float y) : acc(x,y){}
+        inject
+    };
+    struct NOVA_API ForceComponent{
+        inline static componentID m_componentID;
+        nova::vec2 force;
+        ForceComponent(float x,float y) : force(x,y) {}
+        inject
+    };
+    
 }

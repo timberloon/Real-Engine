@@ -21,6 +21,12 @@ namespace nova{
                     this->b-other.b
                 };
         }
+        vec2 operator*(const float& f)const{
+            return {
+                this->a*f,
+                this->b*f
+            };
+        }
     };
 
     struct NOVA_API vec3{
@@ -42,6 +48,13 @@ namespace nova{
                     this->b-other.b,
                     this->c-other.c
                 };
+        }
+        vec3 operator*(const float& f) const {
+            return{
+                this->a*f,
+                this->b*f,
+                this->c*f
+            };
         }
     };
 
@@ -65,6 +78,14 @@ namespace nova{
                 this->b-other.b,
                 this->c-other.c,
                 this->d-other.d
+            };
+        }
+        vec4 operator*(const float& f) const{
+            return{
+                this->a*f,
+                this->b*f,
+                this->c*f,
+                this->d*f
             };
         }
 

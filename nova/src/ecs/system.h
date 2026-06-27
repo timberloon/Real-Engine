@@ -23,7 +23,11 @@ namespace nova{
         std::tuple<
             componentArray(TransformComponent),
             componentArray(SpriteComponent), 
-            componentArray(ColorComponent)    
+            componentArray(ColorComponent),
+            componentArray(MassComponent),
+            componentArray(VelocityComponent),
+            componentArray(AccelarationComponent),
+            componentArray(ForceComponent)  
         > m_components;
         
     public:
@@ -42,9 +46,6 @@ namespace nova{
         void addComponents(entity& e,std::unique_ptr<component>&& u_component){
             auto& arr = std::get<componentArray(component)>(m_components);
             arr[e] = std::move(u_component);
-            return;
-
-            nova::log::log_error("component not added\n");
         }
         template<typename t,typename...args>
         void addComponents(entity& e,std::unique_ptr<t>&& first,std::unique_ptr<args>&& ...rest){

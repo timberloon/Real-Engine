@@ -1,6 +1,7 @@
 #include"scene.h"
+#include"physics/physics2D.h"
 
-nova::scene::scene(float asp){
+nova::scene::scene(){
     this->m_alive = true;
     m_solidShader.define("nova/src/renderer/shaders/vertex.glsl","nova/src/renderer/shaders/fragment.glsl");
     m_textureShader.define("nova/src/renderer/shaders/texturevert.glsl","nova/src/renderer/shaders/texturefrag.glsl");
@@ -13,8 +14,6 @@ nova::scene::scene(float asp){
     m_vao = nullptr;
     m_vbo = nullptr;
     m_ibo = nullptr;
-
-    m_aspect = asp;
 }
 
 void nova::scene::draw(entity& e){
@@ -68,4 +67,18 @@ void nova::scene::draw(entity& e){
     else{
         nova::log::log_error("both color and sprite are null!\n");
     }
+}
+
+void nova::scene::update(entity& e,float delta){
+    auto mass = m_registry.getComponent<MassComponent>(e);
+    auto force = m_registry.getComponent<ForceComponent>(e);
+    auto acc = m_registry.getComponent<AccelarationComponent>(e);
+    auto velocity = m_registry.getComponent<VelocityComponent>(e);    
+
+    nova::mat3 transform;
+
+    if(mass && force) transform = nova::physics::CalculateTransform(delta,*velocity,*acc,*force,*mass); 
+    else if(acc) transform = nova::physics::CalculateTransform(delta,*velocity,*acc);
+    else if(velocity) transform = nova::physics::CalculateTransform(delta,*velocity);
+    m_registry.TransformEntity(e,transform);
 }

@@ -18,10 +18,10 @@ namespace nova{
 
         nova::renderer m_renderer;
 
-        float m_aspect;
     public:
-        scene(float asp);
+        scene();
         void draw(entity& e);
+        void update(entity& e,float delta);
         inline entity createEntity(){return m_registry.createEntity();} 
         
         template<typename...componentTypes>

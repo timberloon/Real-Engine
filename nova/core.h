@@ -23,3 +23,5 @@
 #define sui(x) x*sizeof(unsigned int)
 
 #define stringify(var) #var
+
+#define NOVA_GET_TIME glfwGetTime()
